@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,11 +10,14 @@ class PdfRoutine {
   final pdf = Document();
 
 
-  createPdf(String data) {
+  createPdf(String data) async{
+    final font = await rootBundle.load("fonts/Roboto-Regular.ttf");
+    final ttf = Font.ttf(font);
+
     pdf.addPage(Page(
         pageFormat: PdfPageFormat.a4,
         build: (Context context) {
-         return Center(child: Text(data));
+         return Center(child: Text(data, style: TextStyle(font: ttf, fontSize: 40)));
         }));
     savePDFfile();
   }

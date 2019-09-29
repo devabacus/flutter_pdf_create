@@ -13,8 +13,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    pdfRoutine.createPdf("Hello. how are you?");
-
+    pdfRoutine.createPdf("Привет стасик?");
   }
 
   @override
@@ -24,8 +23,12 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Pdf create test"),
         ),
+        body: Center(
+            child: Text(
+          "Hello. I'm written by other fonts",
+           style: TextStyle(fontFamily: 'Mansalva'),
+        )),
       ),
     );
   }
-
 }
