@@ -10,10 +10,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   PdfRoutine pdfRoutine = PdfRoutine();
+  int weight;
+  String driver;
+  String car_num;
 
   @override
   void initState() {
-    pdfRoutine.createPdf("Привет стасик?");
+
   }
 
   @override
@@ -23,11 +26,37 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Pdf create test"),
         ),
-        body: Center(
-            child: Text(
-          "Hello. I'm written by other fonts",
-           style: TextStyle(fontFamily: 'Mansalva'),
-        )),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                onChanged: (val) {
+                  driver = val;
+                },
+                decoration: InputDecoration(labelText: "Водитель"),
+              ),
+              TextField(
+                onChanged: (val) {
+                  car_num = val;
+                },
+                decoration: InputDecoration(labelText: "Гос номер"),
+              ),
+              TextField(
+                onChanged: (val) {
+                  weight = int.parse(val);
+                },
+                decoration: InputDecoration(labelText: "Вес"),
+              ),
+              RaisedButton(
+                child: Text("Создать накладную"),
+                onPressed: (){
+                  pdfRoutine.createPdf(driver: driver, car_num: car_num, weight: weight);
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
